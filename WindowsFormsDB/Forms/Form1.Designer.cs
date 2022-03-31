@@ -29,9 +29,6 @@ namespace WindowsFormsDB
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonConnect = new System.Windows.Forms.Button();
-            this.buttonDisconnect = new System.Windows.Forms.Button();
-            this.labelConnect = new System.Windows.Forms.Label();
             this.buttonInsertJob = new System.Windows.Forms.Button();
             this.buttonSelect = new System.Windows.Forms.Button();
             this.listBoxJobs = new System.Windows.Forms.ListBox();
@@ -46,39 +43,6 @@ namespace WindowsFormsDB
             this.deletePosicion = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // buttonConnect
-            // 
-            this.buttonConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonConnect.Location = new System.Drawing.Point(12, 361);
-            this.buttonConnect.Name = "buttonConnect";
-            this.buttonConnect.Size = new System.Drawing.Size(91, 23);
-            this.buttonConnect.TabIndex = 0;
-            this.buttonConnect.Text = "Conectar";
-            this.buttonConnect.UseVisualStyleBackColor = true;
-            this.buttonConnect.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // buttonDisconnect
-            // 
-            this.buttonDisconnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonDisconnect.Enabled = false;
-            this.buttonDisconnect.Location = new System.Drawing.Point(109, 361);
-            this.buttonDisconnect.Name = "buttonDisconnect";
-            this.buttonDisconnect.Size = new System.Drawing.Size(91, 23);
-            this.buttonDisconnect.TabIndex = 1;
-            this.buttonDisconnect.Text = "Desconectar";
-            this.buttonDisconnect.UseVisualStyleBackColor = true;
-            this.buttonDisconnect.Click += new System.EventHandler(this.buttonDisconnect_Click);
-            // 
-            // labelConnect
-            // 
-            this.labelConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelConnect.AutoSize = true;
-            this.labelConnect.Location = new System.Drawing.Point(336, 364);
-            this.labelConnect.Name = "labelConnect";
-            this.labelConnect.Size = new System.Drawing.Size(162, 13);
-            this.labelConnect.TabIndex = 2;
-            this.labelConnect.Text = "Estado conexión: Desconectado";
             // 
             // buttonInsertJob
             // 
@@ -187,6 +151,7 @@ namespace WindowsFormsDB
             this.btnChangeData.Text = "Cambiar Datos";
             this.btnChangeData.UseVisualStyleBackColor = true;
             this.btnChangeData.Visible = false;
+            this.btnChangeData.Click += new System.EventHandler(this.btnChangeData_Click);
             // 
             // deletePosicion
             // 
@@ -203,30 +168,23 @@ namespace WindowsFormsDB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(524, 392);
+            this.ClientSize = new System.Drawing.Size(524, 345);
             this.Controls.Add(this.deletePosicion);
             this.Controls.Add(this.btnChangeData);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.listBoxJobs);
             this.Controls.Add(this.buttonSelect);
-            this.Controls.Add(this.labelConnect);
-            this.Controls.Add(this.buttonDisconnect);
-            this.Controls.Add(this.buttonConnect);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button buttonConnect;
-        private System.Windows.Forms.Button buttonDisconnect;
-        private System.Windows.Forms.Label labelConnect;
         private System.Windows.Forms.Button buttonInsertJob;
         private System.Windows.Forms.Button buttonSelect;
         private System.Windows.Forms.ListBox listBoxJobs;
