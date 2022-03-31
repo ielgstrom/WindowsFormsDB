@@ -16,7 +16,7 @@ namespace WindowsFormsDB
             try
             {
 
-           connection = new SqlConnection("Data Source=217.71.207.123,54321;Initial Catalog=Ignasi_Employees;Persist Security Info=True;User ID=sa;Password=123456789");
+            connection = new SqlConnection("Data Source=217.71.207.123,54321;Initial Catalog=Ignasi_Employees;Persist Security Info=True;User ID=sa;Password=123456789");
             connection.Open();
             //labelConnect.Text = "Estado conexión: Conectado";
             }
@@ -25,7 +25,7 @@ namespace WindowsFormsDB
                 MessageBox.Show("Error al iniciar la BBDD: " + r.Message);
             }
         }
-        public SqlConnection connectionReturn()
+        public SqlConnection getConnection()
         {
             return connection;
         }

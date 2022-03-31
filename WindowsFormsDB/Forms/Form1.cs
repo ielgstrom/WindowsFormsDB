@@ -23,11 +23,10 @@ namespace WindowsFormsDB
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //if (connection == null && connection.State != ConnectionState.Open) return;
             var jobToUdate = new DALJobs();
             try
             {
-                jobToUdate.AddJob(textNombreJob.Text, Convert.ToDouble(textSalarioMIN.Text), Convert.ToDouble(textSalarioMax.Text));
+                jobToUdate.AddJob(new Job(textNombreJob.Text, Convert.ToDouble(textSalarioMIN.Text), Convert.ToDouble(textSalarioMax.Text)));
                 MessageBox.Show("Puesto añadido correctamente");
                 buttonSelect_Click(sender, e);
                 deletePosicion.Visible = false;
@@ -47,7 +46,7 @@ namespace WindowsFormsDB
             var accionJobs = new DALJobs();
             listBoxJobs.Items.Clear();
             listaTrabajos.Clear();
-            listaTrabajos = accionJobs.getListJobs(listaTrabajos);
+            listaTrabajos = accionJobs.getListJobs();
             foreach (Job element in listaTrabajos)
             {
                 listBoxJobs.Items.Add(element);

@@ -16,10 +16,11 @@ namespace WindowsFormsDB.DAL
         {
              initDB = new InitializerDB();
         }
-         public List<Job> getListJobs( List<Job> listaTrabajos)
+         public List<Job> getListJobs()
         {
+            List<Job> listaTrabajos = new List<Job>();
             string cadena = "SELECT * FROM JOBS";
-            SqlCommand cmd = new SqlCommand(cadena, initDB.connectionReturn());
+            SqlCommand cmd = new SqlCommand(cadena, initDB.getConnection());
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
@@ -29,14 +30,14 @@ namespace WindowsFormsDB.DAL
             return listaTrabajos;
         }
 
-        public void AddJob(string nombrePosicion, double sueldo_min, double sueldo_max)
+        public void AddJob(Job trabajoNuevo)
         {
             try
             { 
             string sql = @"
                         INSERT INTO jobs
-                        VALUES('" + nombrePosicion + "'," + sueldo_min + ", " + sueldo_max + ")";
-            SqlCommand cmd = new SqlCommand(sql, initDB.connectionReturn());
+                        VALUES('" + trabajoNuevo.getNombrePosicion() + "'," + trabajoNuevo.getSueloMin() + ", " + trabajoNuevo.getSueldoMax() + ")";
+            SqlCommand cmd = new SqlCommand(sql, initDB.getConnection());
             cmd.ExecuteNonQuery();
             }
             catch(Exception rt)
@@ -49,7 +50,7 @@ namespace WindowsFormsDB.DAL
             string sql = @"
                         delete from jobs
                         where job_id=" + job_id;
-            SqlCommand cmd = new SqlCommand(sql, initDB.connectionReturn());
+            SqlCommand cmd = new SqlCommand(sql, initDB.getConnection());
             cmd.ExecuteNonQuery();
         }
         public void modifyJob(string nombrePuesto, double salMin, double salMax, int id_job)
@@ -58,7 +59,7 @@ namespace WindowsFormsDB.DAL
                         UPDATE jobs
                         SET job_title=" +"'"+nombrePuesto+"'"+", min_salary="+"'"+salMin+"'" + ", max_salary=" + "'" + salMax + "'" +
                         "where job_id=" + id_job;
-            SqlCommand cmd = new SqlCommand(sql, initDB.connectionReturn());
+            SqlCommand cmd = new SqlCommand(sql, initDB.getConnection());
             cmd.ExecuteNonQuery();
         }
     }
