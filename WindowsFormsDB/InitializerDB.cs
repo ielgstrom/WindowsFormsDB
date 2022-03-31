@@ -10,24 +10,20 @@ namespace WindowsFormsDB
 {
     class InitializerDB
     {
-        SqlConnection connection = null;
+        SqlConnection _connection = null;
         public InitializerDB()
         {
             try
             {
-
-            connection = new SqlConnection("Data Source=217.71.207.123,54321;Initial Catalog=Ignasi_Employees;Persist Security Info=True;User ID=sa;Password=123456789");
-            connection.Open();
-            //labelConnect.Text = "Estado conexión: Conectado";
+            _connection = new SqlConnection("Data Source=217.71.207.123,54321;Initial Catalog=Ignasi_Employees;Persist Security Info=True;User ID=sa;Password=123456789");
+            _connection.Open();
             }
             catch(Exception r)
             {
                 MessageBox.Show("Error al iniciar la BBDD: " + r.Message);
             }
         }
-        public SqlConnection getConnection()
-        {
-            return connection;
-        }
+        public void Disconnect() { _connection.Close(); }
+        public SqlConnection Connection { get => _connection; }
     }
 }

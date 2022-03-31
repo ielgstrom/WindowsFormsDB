@@ -20,7 +20,7 @@ namespace WindowsFormsDB.DAL
         {
             List<Job> listaTrabajos = new List<Job>();
             string cadena = "SELECT * FROM JOBS";
-            SqlCommand cmd = new SqlCommand(cadena, initDB.getConnection());
+            SqlCommand cmd = new SqlCommand(cadena, initDB.Connection);
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
@@ -37,7 +37,7 @@ namespace WindowsFormsDB.DAL
                 string sql = @"
                         INSERT INTO jobs
                         VALUES(@pPuesto,@pSalarioMin,@pSalarioMax)";
-                SqlCommand cmd = new SqlCommand(sql, initDB.getConnection());
+                SqlCommand cmd = new SqlCommand(sql, initDB.Connection);
                 SqlParameter pPuesto = new SqlParameter("@pPuesto", System.Data.SqlDbType.VarChar, 35);
                 pPuesto.Value = trabajoNuevo.getNombrePosicion();
                 SqlParameter pSalarioMin = new SqlParameter("@pSalarioMin", trabajoNuevo.getSueloMin());
@@ -57,20 +57,20 @@ namespace WindowsFormsDB.DAL
             string sql = @"
                         delete from jobs
                         where job_id=" + job_id;
-            SqlCommand cmd = new SqlCommand(sql, initDB.getConnection());
+            SqlCommand cmd = new SqlCommand(sql, initDB.Connection);
             cmd.ExecuteNonQuery();
         }
-        public void modifyJob(string nombrePuesto, double salMin, double salMax, int id_job)
+        public void modifyJob(Job empleado)
         {
             string sql = @"
                         UPDATE jobs
                         SET job_title=@pJobTitle, min_salary=@minSalary, max_salary=@maxSalary
-                        where job_id=" + id_job;
-            SqlCommand cmd = new SqlCommand(sql, initDB.getConnection());
-            SqlParameter pSalarioMin = new SqlParameter("@minSalary", salMin);
-            SqlParameter pSalarioMax = new SqlParameter("@maxSalary", salMax);
+                        where job_id=" + empleado.getID();
+            SqlCommand cmd = new SqlCommand(sql, initDB.Connection);
+            SqlParameter pSalarioMin = new SqlParameter("@minSalary", empleado.getSueloMin());
+            SqlParameter pSalarioMax = new SqlParameter("@maxSalary", empleado.getSueldoMax());
             SqlParameter pPuesto = new SqlParameter("@pJobTitle", System.Data.SqlDbType.VarChar, 35);
-            pPuesto.Value = nombrePuesto;
+            pPuesto.Value = empleado.getNombrePosicion();
             cmd.Parameters.Add(pPuesto);
             cmd.Parameters.Add(pSalarioMin);
             cmd.Parameters.Add(pSalarioMax);

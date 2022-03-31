@@ -92,7 +92,6 @@ namespace WindowsFormsDB
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
             buttonInsertJob.Enabled = true;
             buttonSelect.Enabled = true;
             textNombreJob.Enabled = true;
