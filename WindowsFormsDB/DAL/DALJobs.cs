@@ -33,12 +33,19 @@ namespace WindowsFormsDB.DAL
         public void AddJob(Job trabajoNuevo)
         {
             try
-            { 
-            string sql = @"
+            {
+                string sql = @"
                         INSERT INTO jobs
-                        VALUES('" + trabajoNuevo.getNombrePosicion() + "'," + trabajoNuevo.getSueloMin() + ", " + trabajoNuevo.getSueldoMax() + ")";
-            SqlCommand cmd = new SqlCommand(sql, initDB.getConnection());
-            cmd.ExecuteNonQuery();
+                        VALUES(@pPuesto,@pSalarioMin,@pSalarioMax)";
+                SqlCommand cmd = new SqlCommand(sql, initDB.getConnection());
+                SqlParameter pPuesto = new SqlParameter("@pPuesto", System.Data.SqlDbType.VarChar, 35);
+                pPuesto.Value = trabajoNuevo.getNombrePosicion();
+                SqlParameter pSalarioMin = new SqlParameter("@pSalarioMin", trabajoNuevo.getSueloMin());
+                SqlParameter pSalarioMax = new SqlParameter("@pSalarioMax", trabajoNuevo.getSueldoMax());
+                cmd.Parameters.Add(pPuesto);
+                cmd.Parameters.Add(pSalarioMax);
+                cmd.Parameters.Add(pSalarioMin);
+                cmd.ExecuteNonQuery();
             }
             catch(Exception rt)
             {
@@ -57,9 +64,16 @@ namespace WindowsFormsDB.DAL
         {
             string sql = @"
                         UPDATE jobs
-                        SET job_title=" +"'"+nombrePuesto+"'"+", min_salary="+"'"+salMin+"'" + ", max_salary=" + "'" + salMax + "'" +
-                        "where job_id=" + id_job;
+                        SET job_title=@pJobTitle, min_salary=@minSalary, max_salary=@maxSalary
+                        where job_id=" + id_job;
             SqlCommand cmd = new SqlCommand(sql, initDB.getConnection());
+            SqlParameter pSalarioMin = new SqlParameter("@minSalary", salMin);
+            SqlParameter pSalarioMax = new SqlParameter("@maxSalary", salMax);
+            SqlParameter pPuesto = new SqlParameter("@pJobTitle", System.Data.SqlDbType.VarChar, 35);
+            pPuesto.Value = nombrePuesto;
+            cmd.Parameters.Add(pPuesto);
+            cmd.Parameters.Add(pSalarioMin);
+            cmd.Parameters.Add(pSalarioMax);
             cmd.ExecuteNonQuery();
         }
     }
