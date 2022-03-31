@@ -32,6 +32,9 @@ namespace WindowsFormsDB
                 buttonSelect_Click(sender, e);
                 deletePosicion.Visible = false;
                 btnChangeData.Visible = false;
+                textNombreJob.Text = "";
+                textSalarioMIN.Text = "";
+                textSalarioMax.Text = "";
             }
             catch (Exception r)
             {
